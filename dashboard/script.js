@@ -5,7 +5,6 @@ document.addEventListener('DOMContentLoaded', () => {
       const tableBody = document.querySelector('#results-table tbody');
       data.forEach(item => {
         const row = document.createElement('tr');
-
         const color = item.status === 'green' ? '🟢 green' : '🔴 red';
 
         row.innerHTML = `
