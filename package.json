@@ -1,0 +1,14 @@
+{
+  "name": "green-ai-mvp",
+  "version": "1.0.0",
+  "description": "A web page classifier to determine if content is green or red.",
+  "main": "backend/server.js",
+  "scripts": {
+    "start": "node backend/server.js"
+  },
+  "dependencies": {
+    "axios": "^1.10.0",
+    "dotenv": "^16.6.1",
+    "express": "^4.18.2"
+  }
+}
