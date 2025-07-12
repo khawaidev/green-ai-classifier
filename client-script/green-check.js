@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const content = document.body.innerText;
   const url = window.location.href;
 
-  fetch('http://localhost:3000/classify', {
+  fetch('https://green-ai-classifier.onrender.com', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
