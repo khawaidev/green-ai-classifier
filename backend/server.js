@@ -26,19 +26,25 @@ app.use(express.static(path.join(__dirname, '..', 'dashboard')));
 
 app.get('/api/data', (req, res) => {
   const dbPath = path.join(__dirname, 'data', 'green-pages.json');
-  fs.readFile(dbPath, 'utf-8', (err, data) => {
+
+  // Ensure file exists
+  if (!fs.existsSync(dbPath)) {
+    fs.writeFileSync(dbPath, '[]');
+  }
+
+  fs.readFile(dbPath, 'utf-8', (err, raw) => {
     if (err) {
       console.error('Error reading data file:', err);
       return res.status(500).json({ error: 'Failed to read data' });
     }
-    res.json(JSON.parse(data));
+
+    try {
+      const parsed = raw.trim() === '' ? [] : JSON.parse(raw);
+      res.json(parsed);
+    } catch (parseErr) {
+      console.error('Error parsing JSON:', parseErr);
+      res.status(500).json({ error: 'Invalid JSON data' });
+    }
   });
 });
 
-app.get('/', (req, res) => {
-  res.send('Green AI Web Page Classifier Backend');
-});
-
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
